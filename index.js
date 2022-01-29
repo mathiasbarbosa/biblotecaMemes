@@ -41,7 +41,7 @@ peticion.addEventListener("load", function(){
 peticion.open("GET",` https://api.imgflip.com/get_memes`) 
 peticion.send()
 
-const arraySeleccion = [];
+const arraySeleccion = JSON.parse( localStorage.getItem("arrGuardados") ) || [] ;
 
 class Meme {
     
@@ -50,15 +50,16 @@ class Meme {
         this.id = id,
         this.nombre = nombre,
         this.url = url
+
     }
 
-    addQuantity () {
-        return this.cantidad += this.cantidad + 1
-    }
+    // addQuantity () {
+    //     return this.cantidad += this.cantidad + 1
+    // }
 
-    subtractQuantity () {
-        return this.cantidad -= this.cantidad - 1
-    }
+    // subtractQuantity () {
+    //     return this.cantidad -= this.cantidad - 1
+    // }
 
 
 }
@@ -75,7 +76,7 @@ const addEvent = () => {
         })
         
     }
-    console.log(btnAdd);
+    
 }
 
 const filter = (param) => {
@@ -83,7 +84,7 @@ const filter = (param) => {
     if (resultFilter.length != 0) {
         arraySeleccion.push( new Meme (resultFilter[0].id, resultFilter[0].name, resultFilter[0].url) )
     }
-    console.log(arraySeleccion);
+    localStorage.setItem("arrGuardados", JSON.stringify(arraySeleccion))
 };
 
 
